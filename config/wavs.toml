@@ -1,0 +1,9 @@
+data = "./.wavs-data/wavs"
+active_trigger_chains = ["anvil"]
+max_wasm_fuel = 1_000_000
+
+# Anvil defaults
+[chains.eth.anvil]
+chain_id = "31337"
+ws_endpoint = "ws://localhost:8545"
+http_endpoint = "http://localhost:8545"

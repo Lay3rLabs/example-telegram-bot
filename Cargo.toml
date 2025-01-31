@@ -1,6 +1,6 @@
 [workspace]
 members = [
-  "component",
+  "components/*",
 ]
 resolver = "2"
 
@@ -15,6 +15,9 @@ repository = "https://github.com/Lay3rLabs/cosmos-eth-bridge"
 description = "Layer AVS Cosmos -> Eth Bridge Example"
 
 [workspace.dependencies]
+# WAVS
+layer-wasi = {git = "https://github.com/Lay3rLabs/WAVS.git"}
+
 # WASI
 wasi = "0.13.3"
 wit-bindgen = "0.38.0"
@@ -29,7 +32,10 @@ async-trait = "0.1.85"
 anyhow = "1.0.95"
 
 # Ethereum
-alloy = {version = "0.9.2", features = ["full"]}
+alloy-sol-macro = "0.8.15"
+alloy-sol-types = "0.8.15"
+alloy-rpc-types = "0.9.2"
+alloy-primitives = "0.8.15"
 
 # Logging
 tracing-subscriber = {version ="0.3.19", features = ["env-filter"]}
@@ -41,8 +47,7 @@ reqwest = {version = "0.12.12", features=["json"]}
 # Data formats
 serde = {version = "1.0.217", features = ["derive"]}
 serde_json = "1.0.137"
-hex = "0.4.3"
-toml = "0.8.19"
+const-hex = "1.14.0"
 
 # Misc
 cfg-if = "1.0.0"
