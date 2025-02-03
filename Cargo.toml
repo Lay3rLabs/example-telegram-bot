@@ -16,13 +16,13 @@ description = "Layer AVS Cosmos -> Eth Bridge Example"
 
 [workspace.dependencies]
 # WAVS
-layer-wasi = {git = "https://github.com/Lay3rLabs/WAVS.git"}
+wavs-wasi-chain = {git = "https://github.com/Lay3rLabs/WAVS.git", rev = "933d539768734eda123846595e906f265899892f"}
 
 # WASI
 wasi = "0.13.3"
 wit-bindgen = "0.38.0"
 wit-bindgen-rt = "0.38.0"
-wstd = "0.4.0"
+wstd = "0.5.0"
 
 # Async
 tokio = {version = "1.43.0", features = ["full"]}

@@ -1,14 +1,12 @@
 mod bindings;
 mod telegram;
 
+use alloy_sol_macro::sol;
 use bindings::{
     export,
-    wavs::worker::layer_types::{
-        TriggerData, TriggerDataCosmosContractEvent, TriggerDataEthContractEvent,
-    },
+    wavs::worker::layer_types::{TriggerData, TriggerDataEthContractEvent},
     Guest, TriggerAction,
 };
-use alloy_sol_macro::sol;
 use telegram::TelegramBot;
 use wstd::runtime::block_on;
 
@@ -19,11 +17,11 @@ impl Guest for Component {
         match trigger_action.data {
             TriggerData::EthContractEvent(TriggerDataEthContractEvent { log, .. }) => {
                 let event: SendTelegram =
-                    layer_wasi::ethereum::decode_event_log_data(log).map_err(|e| e.to_string())?;
+                    wavs_wasi_chain::decode_event_log_data!(log).map_err(|e| e.to_string())?;
 
                 if event.operator_id == get_operator_id()? {
-                    block_on(|reactor| async move {
-                        let bot = TelegramBot::new(reactor).map_err(|e| e.to_string())?;
+                    block_on(async move {
+                        let bot = TelegramBot::new().map_err(|e| e.to_string())?;
                         bot.send_message(event.message)
                             .await
                             .map_err(|e| e.to_string())

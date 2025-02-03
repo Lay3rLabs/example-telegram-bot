@@ -17,7 +17,7 @@ alloy-sol-macro = {workspace = true}
 alloy-sol-types = {workspace = true}
 alloy-primitives = {workspace = true}
 wasi = {workspace = true}
-layer-wasi = {workspace = true}
+wavs-wasi-chain = {workspace = true}
 const-hex = {workspace = true}
 
 [package.metadata.component]

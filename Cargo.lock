@@ -1032,10 +1032,10 @@ dependencies = [
  "alloy-sol-types",
  "anyhow",
  "const-hex",
- "layer-wasi",
  "serde",
  "serde_json",
  "wasi 0.13.3+wasi-0.2.2",
+ "wavs-wasi-chain",
  "wit-bindgen-rt 0.38.0",
  "wstd",
 ]
@@ -2426,36 +2426,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "layer-wasi"
-version = "0.2.0"
-source = "git+https://github.com/Lay3rLabs/WAVS.git#c3026c18bd5fc3cc7d1c64bb3244583a6f71a3d1"
-dependencies = [
- "alloy-json-rpc",
- "alloy-primitives",
- "alloy-provider",
- "alloy-rpc-client",
- "alloy-rpc-types",
- "alloy-sol-types",
- "alloy-transport",
- "alloy-transport-http",
- "anyhow",
- "async-trait",
- "cfg-if",
- "cosmwasm-std",
- "layer-climb",
- "serde",
- "serde_json",
- "tendermint 0.40.1",
- "tendermint-rpc 0.40.1",
- "tower-service",
- "url",
- "wasi 0.13.3+wasi-0.2.2",
- "wit-bindgen",
- "wit-bindgen-rt 0.37.0",
- "wstd",
-]
-
-[[package]]
 name = "lazy_static"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2905,8 +2875,8 @@ dependencies = [
  "alloy-sol-types",
  "anyhow",
  "const-hex",
- "layer-wasi",
  "wasi 0.13.3+wasi-0.2.2",
+ "wavs-wasi-chain",
  "wit-bindgen-rt 0.38.0",
 ]
 
@@ -4608,6 +4578,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "wasi"
+version = "0.14.0+wasi-0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b3d67b0bdfec72b9fbaba698033291c327ef19ce3b34efbdcd7dc402a53850d9"
+dependencies = [
+ "wit-bindgen-rt 0.37.0",
+]
+
+[[package]]
 name = "wasm-bindgen"
 version = "0.2.100"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4742,6 +4721,36 @@ dependencies = [
  "pin-utils",
  "slab",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "wavs-wasi-chain"
+version = "0.3.0-alpha1"
+source = "git+https://github.com/Lay3rLabs/WAVS.git?rev=933d539768734eda123846595e906f265899892f#933d539768734eda123846595e906f265899892f"
+dependencies = [
+ "alloy-json-rpc",
+ "alloy-primitives",
+ "alloy-provider",
+ "alloy-rpc-client",
+ "alloy-rpc-types",
+ "alloy-sol-types",
+ "alloy-transport",
+ "alloy-transport-http",
+ "anyhow",
+ "async-trait",
+ "cfg-if",
+ "cosmwasm-std",
+ "layer-climb",
+ "serde",
+ "serde_json",
+ "tendermint 0.40.1",
+ "tendermint-rpc 0.40.1",
+ "tower-service",
+ "url",
+ "wasi 0.14.0+wasi-0.2.3",
+ "wit-bindgen",
+ "wit-bindgen-rt 0.37.0",
+ "wstd",
 ]
 
 [[package]]
@@ -5031,13 +5040,27 @@ checksum = "1e9df38ee2d2c3c5948ea468a8406ff0db0b29ae1ffde1bcf20ef305bcc95c51"
 
 [[package]]
 name = "wstd"
-version = "0.4.0"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "159bdbe25114f4549900a9ba7170f3604c10b76c76bb58bbb61767b27773f844"
+checksum = "26293c0587d2203a141282311221f9ba0048425a04b21d9fcff8fc62fc8ecd75"
 dependencies = [
+ "futures-core",
+ "http",
+ "itoa",
+ "pin-project-lite",
  "slab",
- "url",
- "wasi 0.13.3+wasi-0.2.2",
+ "wasi 0.14.0+wasi-0.2.3",
+ "wstd-macro",
+]
+
+[[package]]
+name = "wstd-macro"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "75a8316f91fc3e508b03fdc979dec4ceeddb29744fc1c2c2ed825e00159f96f9"
+dependencies = [
+ "quote",
+ "syn 2.0.96",
 ]
 
 [[package]]

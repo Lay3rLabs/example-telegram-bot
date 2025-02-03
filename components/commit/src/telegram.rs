@@ -1,19 +1,20 @@
 use std::collections::HashMap;
 
 use anyhow::{anyhow, Result};
-use layer_wasi::wasi::{Method, Reactor, Request, Response, WasiPollable};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
+use wstd::{
+    http::{body::IncomingBody, Client, IntoBody, Request, Response, StatusCode},
+    io::{empty, AsyncRead},
+};
 
 pub struct TelegramBot {
     pub token: String,
     pub chat_id: String,
-    pub reactor: Reactor,
 }
 
 impl TelegramBot {
-    pub fn new(reactor: Reactor) -> Result<Self> {
+    pub fn new() -> Result<Self> {
         Ok(Self {
-            reactor,
             token: std::env::var("WAVS_ENV_TELEGRAM_BOT_TOKEN")?,
             chat_id: std::env::var("WAVS_ENV_TELEGRAM_CHAT_ID")?,
         })
@@ -34,17 +35,11 @@ impl TelegramBot {
     async fn make_request_empty<T: DeserializeOwned>(&self, method: &str) -> Result<T> {
         let url = format!("https://api.telegram.org/bot{}/{}", self.token, method);
 
-        let request = Request::post(&url).map_err(|e| anyhow!(e))?;
+        let request = Request::post(url).body(empty()).map_err(|e| anyhow!(e))?;
 
-        let resp = self.reactor.send(request).await.map_err(|e| anyhow!(e))?;
+        let res = Client::new().send(request).await.map_err(|e| anyhow!(e))?;
 
-        let json: TelegramResult<T> = resp.json().map_err(|e| anyhow!(e))?;
-
-        if json.ok {
-            Ok(json.result)
-        } else {
-            Err(anyhow!("Telegram API error"))
-        }
+        handle_response(res).await
     }
 
     async fn make_request_params<T: DeserializeOwned>(
@@ -62,26 +57,37 @@ impl TelegramBot {
             body += &format!("{}={}\n", key, value);
         }
 
-        let mut request = Request::post(&url).map_err(|e| anyhow!(e))?;
+        let request = Request::post(url)
+            .header("content-type", "application/x-www-form-urlencoded")
+            .body(body.into_body())
+            .map_err(|e| anyhow!(e))?;
 
-        request.headers.push((
-            "content-type".to_string(),
-            "application/x-www-form-urlencoded".to_string(),
-        ));
-        request.body = body.into();
+        let res = Client::new().send(request).await.map_err(|e| anyhow!(e))?;
 
-        let resp = self.reactor.send(request).await.map_err(|e| anyhow!(e))?;
-
-        let json: TelegramResult<T> = resp.json().map_err(|e| anyhow!(e))?;
-
-        if json.ok {
-            Ok(json.result)
-        } else {
-            Err(anyhow!("Telegram API error"))
-        }
+        handle_response(res).await
     }
 }
 
+async fn handle_response<T: DeserializeOwned>(mut resp: Response<IncomingBody>) -> Result<T> {
+    match resp.status() {
+        StatusCode::OK => {
+            let body = resp.body_mut();
+            let mut body_buf = Vec::new();
+            body.read_to_end(&mut body_buf)
+                .await
+                .map_err(|e| anyhow!(e))?;
+            let json: TelegramResult<T> =
+                serde_json::from_slice(&body_buf).map_err(|e| anyhow!(e))?;
+
+            if json.ok {
+                Ok(json.result)
+            } else {
+                Err(anyhow!("Telegram API error"))
+            }
+        }
+        status => Err(anyhow!("unexpected status code: {status}")),
+    }
+}
 #[derive(Deserialize, Serialize, Debug)]
 struct TelegramResult<T> {
     ok: bool,

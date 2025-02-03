@@ -20,7 +20,7 @@ impl Guest for Component {
         match trigger_action.data {
             TriggerData::EthContractEvent(TriggerDataEthContractEvent { log, .. }) => {
                 let event: Transfer =
-                    layer_wasi::ethereum::decode_event_log_data(log).map_err(|e| e.to_string())?;
+                    wavs_wasi_chain::decode_event_log_data!(log).map_err(|e| e.to_string())?;
 
                 let message = Message {
                     operator_id: get_operator_id()?,
