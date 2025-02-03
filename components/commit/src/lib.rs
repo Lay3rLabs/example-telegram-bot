@@ -1,13 +1,14 @@
+mod bindings;
 mod telegram;
 
-use alloy_sol_macro::sol;
-use layer_wasi::{
-    bindings::{
-        compat::{TriggerData, TriggerDataEthContractEvent},
-        world::{Guest, TriggerAction},
+use bindings::{
+    export,
+    wavs::worker::layer_types::{
+        TriggerData, TriggerDataCosmosContractEvent, TriggerDataEthContractEvent,
     },
-    export_layer_trigger_world,
+    Guest, TriggerAction,
 };
+use alloy_sol_macro::sol;
 use telegram::TelegramBot;
 use wstd::runtime::block_on;
 
@@ -51,4 +52,4 @@ sol! {
     event SendTelegram(string operator_id, string message);
 }
 
-export_layer_trigger_world!(Component);
+export!(Component with_types_in bindings);
