@@ -16,7 +16,7 @@ description = "Layer AVS Cosmos -> Eth Bridge Example"
 
 [workspace.dependencies]
 # WAVS
-wavs-wasi-chain = {git = "https://github.com/Lay3rLabs/WAVS.git", rev = "933d539768734eda123846595e906f265899892f"}
+wavs-wasi-chain = "0.3.0-alpha1"
 
 # WASI
 wasi = "0.13.3"
@@ -32,10 +32,10 @@ async-trait = "0.1.85"
 anyhow = "1.0.95"
 
 # Ethereum
-alloy-sol-macro = "0.8.15"
-alloy-sol-types = "0.8.15"
+alloy-sol-macro = "0.8.20"
+alloy-sol-types = "0.8.20"
 alloy-rpc-types = "0.9.2"
-alloy-primitives = "0.8.15"
+alloy-primitives = "0.8.20"
 
 # Logging
 tracing-subscriber = {version ="0.3.19", features = ["env-filter"]}
