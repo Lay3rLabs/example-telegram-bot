@@ -28,9 +28,9 @@ const baseObject = {
       },
       component: "component1",
       submit: {
-        eigenContract: {
+        ethereumContract: {
           chain_name: "anvil",
-          service_manager: "%SUBMIT_ADDRESS%",
+          address: "%SUBMIT_ADDRESS%",
           max_gas: null,
         },
       },
@@ -79,7 +79,7 @@ function main() {
   result.workflows.workflow1.trigger.eth_contract_event.event_hash = hexFormat(EVENT_HASH_1); 
   result.workflows.workflow2.trigger.eth_contract_event.address = TRIGGER_ADDRESS;
   result.workflows.workflow2.trigger.eth_contract_event.event_hash = hexFormat(EVENT_HASH_2); 
-  result.workflows.workflow1.submit.eigenContract.service_manager = SUBMIT_ADDRESS;
+  result.workflows.workflow1.submit.ethereumContract.address = SUBMIT_ADDRESS;
 
   // Write to the output file
   const fs = require('fs');

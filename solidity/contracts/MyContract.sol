@@ -15,7 +15,7 @@ contract MyContract is ERC20 {
         _mint(sender, 10000000000000000000000000000);
     }
 
-    function handleAddPayload(bytes calldata data, bytes calldata) external {
+    function handleSignedData(bytes calldata data, bytes calldata) external {
         Message memory message = abi.decode(data, (Message));
 
         emit SendTelegram(message.operator_id, message.message);
