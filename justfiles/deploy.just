@@ -33,7 +33,7 @@ upload-components:
     @just _upload-component "{{justfile_directory()}}/{{WASI_OUT_DIR}}/commit.wasm" {{DIGEST_COMMIT_FILEPATH}}
 
 _upload-component COMPONENT FILEPATH:
-    @echo `(wavs-cli upload-component --component {{COMPONENT}} | sed '/^$/d' | tail -n 1)` | tr -d '\n' > "{{FILEPATH}}"
+    @echo `(wavs-cli upload-component --home ./config --component {{COMPONENT}} | sed '/^$/d' | tail -n 1)` | tr -d '\n' > "{{FILEPATH}}"
 
 
 deploy-service:
