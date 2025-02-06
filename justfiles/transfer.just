@@ -9,8 +9,7 @@ _transfer CONTRACT_ADDRESS:
       1000 \
       --sig "run(string,string,string,uint256)" \
       --rpc-url "{{ETHEREUM_RPC_URL}}" \
-      --broadcast \
-      --verify
+      --broadcast
   @just transfer-check-balance
 
 transfer-check-balance:
