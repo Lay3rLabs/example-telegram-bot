@@ -71,8 +71,4 @@ The way this works is it watches for ERC20 events. When an event is picked up it
 
 This isn't bulletproof, but it more-or-less ensures that only one operator sends the message, and that it was verified
 
-For the sake of brevity (and expected changes landing soon), the handler contract is not perfectly secure (can be called by anyone). This is an easy fix :)
-
-By design, this example does not pull in anything from WAVS as a submodule. The `layer-wasi` crate is pulled in via Cargo and git.
-
-You may need to change your settings in `.cargo/config.toml` to access this privately
+The only thing copy/pasted from WAVS are solidity _interfaces_.
