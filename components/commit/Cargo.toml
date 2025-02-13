@@ -15,10 +15,7 @@ anyhow = {workspace = true}
 wit-bindgen-rt = {workspace = true}
 alloy-sol-macro = {workspace = true}
 alloy-sol-types = {workspace = true}
-alloy-primitives = {workspace = true}
-wasi = {workspace = true}
 wavs-wasi-chain = {workspace = true}
-const-hex = {workspace = true}
 serde = {workspace = true}
 serde_json = {workspace = true}
 wstd = {workspace = true}

@@ -20,34 +20,17 @@ wavs-wasi-chain = "0.3.0-alpha3"
 
 # WASI
 wasi = "0.13.3"
-wit-bindgen = "0.38.0"
 wit-bindgen-rt = "0.38.0"
 wstd = "0.5.0"
-
-# Async
-tokio = {version = "1.43.0", features = ["full"]}
-async-trait = "0.1.85"
 
 # Error handling
 anyhow = "1.0.95"
 
 # Ethereum
-alloy-sol-macro = "0.8.20"
-alloy-sol-types = "0.8.20"
-alloy-rpc-types = "0.9.2"
-alloy-primitives = "0.8.20"
-
-# Logging
-tracing-subscriber = {version ="0.3.19", features = ["env-filter"]}
-tracing = "0.1.41"
-
-# Networking
-reqwest = {version = "0.12.12", features=["json"]}
+alloy-sol-macro = "0.8.21"
+alloy-sol-types = "0.8.21"
 
 # Data formats
 serde = {version = "1.0.217", features = ["derive"]}
 serde_json = "1.0.137"
 const-hex = "1.14.0"
-
-# Misc
-cfg-if = "1.0.0"

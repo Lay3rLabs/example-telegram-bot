@@ -11,11 +11,9 @@ description.workspace = true
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-anyhow = {workspace = true} 
 wit-bindgen-rt = {workspace = true}
 alloy-sol-macro = {workspace = true}
 alloy-sol-types = {workspace = true}
-alloy-primitives = {workspace = true}
 wasi = {workspace = true}
 wavs-wasi-chain = {workspace = true}
 const-hex = {workspace = true}
