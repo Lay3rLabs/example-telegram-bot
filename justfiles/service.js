@@ -76,9 +76,9 @@ function main() {
   result.components.component1.wasm = DIGEST_1;
   result.components.component2.wasm = DIGEST_2;
   result.workflows.workflow1.trigger.eth_contract_event.address = TRIGGER_ADDRESS;
-  result.workflows.workflow1.trigger.eth_contract_event.event_hash = hexFormat(EVENT_HASH_1); 
+  result.workflows.workflow1.trigger.eth_contract_event.event_hash = EVENT_HASH_1; 
   result.workflows.workflow2.trigger.eth_contract_event.address = TRIGGER_ADDRESS;
-  result.workflows.workflow2.trigger.eth_contract_event.event_hash = hexFormat(EVENT_HASH_2); 
+  result.workflows.workflow2.trigger.eth_contract_event.event_hash = EVENT_HASH_2; 
   result.workflows.workflow1.submit.ethereum_contract.address = SUBMIT_ADDRESS;
 
   // Write to the output file
@@ -86,20 +86,6 @@ function main() {
   fs.writeFileSync(outFile, JSON.stringify(result, null));
 
 
-}
-
-function hexFormat(s) {
-  let i = 0;
-  let len = s.length;
-  let result = [];
-  while (i < len) {
-    let n = s.substring(i, i + 2);
-    if (/^[0-9a-fA-F]+$/.test(n)) {
-      result.push(parseInt(n, 16));
-    }
-    i += 2;
-  }
-  return result;
 }
 
 // Run main if called directly
