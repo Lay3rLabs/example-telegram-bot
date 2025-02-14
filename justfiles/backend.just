@@ -4,7 +4,8 @@ start-backend:
   @anvil > /dev/null 2>&1 &
   @echo "waiting a second before starting WAVS..."
   @sleep 1
-  @wavs --home=./config > /dev/null &
+  @touch "{{WAVS_LOG_FILEPATH}}"
+  @wavs --home=./config > "{{WAVS_LOG_FILEPATH}}" 2>&1 &
   @echo "done!"
 
 stop-backend:

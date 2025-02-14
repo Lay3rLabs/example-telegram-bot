@@ -13,6 +13,9 @@ ETHEREUM_RPC_URL := "http://localhost:8545"
 # CLI
 CLI_DEPLOYMENTS_FILEPATH := ".wavs-data/cli/deployments.json"
 
+# WAVS LOG OUTPUT
+WAVS_LOG_FILEPATH := ".build-artifacts/wavs.log"
+
 # Build output 
 SOLIDITY_OUT_DIR := ".build-artifacts/contracts" 
 WASI_OUT_DIR := ".build-artifacts/wasi-components" 
