@@ -790,9 +790,9 @@ dependencies = [
 
 [[package]]
 name = "cc"
-version = "1.2.13"
+version = "1.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7777341816418c02e033934a09f20dc0ccaf65a5201ef8a450ae0105a573fda"
+checksum = "0c3d1b2e905a3a7b00a6141adb0e4c0bb941d11caf55349d863942a1cc44e3c9"
 dependencies = [
  "shlex",
 ]
@@ -3132,9 +3132,9 @@ dependencies = [
 
 [[package]]
 name = "wavs-wasi-chain"
-version = "0.3.0-alpha4"
+version = "0.3.0-alpha5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "96e9be8fcc823682ac0066dcf3074baaf68fe446542693f75797a2fb6002305b"
+checksum = "a8eb5ddb2a9f5132169e894272dd7c7819b02bccbd807726b4dda2b6ba43bfe3"
 dependencies = [
  "alloy-json-rpc",
  "alloy-primitives",
@@ -3146,6 +3146,8 @@ dependencies = [
  "anyhow",
  "cfg-if",
  "futures-utils-wasm",
+ "http",
+ "serde",
  "serde_json",
  "tower-service",
  "wasi 0.14.1+wasi-0.2.3",
