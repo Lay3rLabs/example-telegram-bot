@@ -1,30 +1,29 @@
-# Layer AVS Telegram Bot 
+# Layer AVS Telegram Bot
 
-* _**Clone with --recursive or remember to pull the submodules for solidity dependencies**_
+* _**git clone git@github.com:Lay3rLabs/example-telegram-bot.git --recursive**_
 
 ## One-time setup
 
-1. Copy `.env.example` to `.env` and set the right vars
+0. `git submodule update --init --recursive`
+
+1. `cp .env.example .env`
 
 2. Join the your Telegram Group associated with the chat ID in `.env` to get notifications
 
-3. Install WAVS _natively_
+3. Setup your system: <https://docs.wavs.xyz/tutorial/2-setup>
+    - Rust
+    - Cargo Component
+    - Docker
+    - JQ
+    - Foundry
+    - Node.js (v21+)
 
-_TODO: use the docker images and adjust the commands here accordingly_
-
-```bash
-git clone https://github.com/Lay3rLabs/WAVS.git ~/WAVS
-
-cd ~/WAVS && just install-native ~/wavs-config ~/wavs-data
-```
 
 4. **Build all the contracts and components**
 
 ```bash
 just build
 ```
-
-5. Install any other generic tooling that pops up... e.g. [just](https://github.com/casey/just), [foundry](https://book.getfoundry.sh/getting-started/installation), [docker](https://www.docker.com/) etc.
 
 That's it!
 

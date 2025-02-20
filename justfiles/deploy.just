@@ -9,10 +9,10 @@ deploy-ethereum:
     @just _deploy-eigen-handler
 
 _deploy-eigen-core:
-    @wavs-cli deploy-eigen-core --home ./config --chain anvil --eth-mnemonic "{{ETHEREUM_MNEMONIC}}"
+    @{{WAVS_CMD}} wavs-cli deploy-eigen-core --home=/data/config --chain anvil --eth-mnemonic "{{ETHEREUM_MNEMONIC}}"
 
 _deploy-eigen-handler:
-    just _deploy-eigen-handler-inner $(cat "{{CLI_DEPLOYMENTS_FILEPATH}}" | jq -r '.eigen_service_managers.anvil[-1]')
+    just _deploy-eigen-handler-inner $({{WAVS_CMD}} cat "{{CLI_DEPLOYMENTS_FILEPATH}}" | jq -r '.eigen_service_managers.anvil[-1]')
 
 _deploy-eigen-handler-inner HANDLER_ADDRESS:
     @rm -rf broadcast
@@ -23,17 +23,17 @@ _deploy-eigen-handler-inner HANDLER_ADDRESS:
         --rpc-url "{{ETHEREUM_RPC_URL}}" \
         --broadcast \
         --json 2>&1 > /dev/null
-    @cat broadcast/Deploy.s.sol/31337/run-latest.json | jq -r '.transactions[0].contractAddress' | tr -d '\n' > "{{CONTRACT_ADDRESS_FILEPATH}}"
+    cat broadcast/Deploy.s.sol/31337/run-latest.json | jq -r '.transactions[0].contractAddress' | tr -d '\n' > "{{CONTRACT_ADDRESS_FILEPATH}}"
 
 _deploy-eigen-manager:
-    @wavs-cli deploy-eigen-service-manager --home ./config --chain anvil --eth-mnemonic "{{ETHEREUM_MNEMONIC}}" \
+    @{{WAVS_CMD}} wavs-cli deploy-eigen-service-manager --home=/data/config --chain anvil --eth-mnemonic "{{ETHEREUM_MNEMONIC}}" \
 
 upload-components:
-    @just _upload-component "{{justfile_directory()}}/{{WASI_OUT_DIR}}/prepare.wasm" {{DIGEST_PREPARE_FILEPATH}}
-    @just _upload-component "{{justfile_directory()}}/{{WASI_OUT_DIR}}/commit.wasm" {{DIGEST_COMMIT_FILEPATH}}
+    @just _upload-component "/data/.build-artifacts/wasi-components/prepare.wasm" .build-artifacts/component.prepare.digest
+    @just _upload-component "/data/.build-artifacts/wasi-components/commit.wasm" .build-artifacts/component.commit.digest
 
 _upload-component COMPONENT FILEPATH:
-    @echo `(wavs-cli upload-component --home ./config --component {{COMPONENT}} | sed '/^$/d' | tail -n 1)` | tr -d '\n' > "{{FILEPATH}}"
+    @echo `({{WAVS_CMD}} wavs-cli upload-component --home=/data/config --component {{COMPONENT}} | sed '/^$/d' | tail -n 1)` | tr -d '\n' > "{{FILEPATH}}"
 
 
 deploy-service:
@@ -60,4 +60,4 @@ _deploy-service-write-json SERVICE_ID DIGEST_1 DIGEST_2 CONTRACT_ADDRESS:
 _deploy-service-send:
     @echo ""
     @echo "*** deploying service *** "
-    wavs-cli deploy-service-raw --home ./config --service "@{{SERVICE_JSON_FILEPATH}}"
+    {{WAVS_CMD}} wavs-cli deploy-service-raw --home=/data/config --service "@/data/.build-artifacts/service.json"

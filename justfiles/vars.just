@@ -1,5 +1,5 @@
 # Foundryup installs nightly by default, let's make that less annoying
-export FOUNDRY_DISABLE_NIGHTLY_WARNING := "true" 
+export FOUNDRY_DISABLE_NIGHTLY_WARNING := "true"
 
 # General
 ARCH := `uname -m`
@@ -11,14 +11,14 @@ ETHEREUM_MNEMONIC := "test test test test test test test test test test test jun
 ETHEREUM_RPC_URL := "http://localhost:8545"
 
 # CLI
-CLI_DEPLOYMENTS_FILEPATH := ".wavs-data/cli/deployments.json"
+CLI_DEPLOYMENTS_FILEPATH := "/data/.wavs-data/cli/deployments.json"
 
 # WAVS LOG OUTPUT
 WAVS_LOG_FILEPATH := ".build-artifacts/wavs.log"
 
-# Build output 
-SOLIDITY_OUT_DIR := ".build-artifacts/contracts" 
-WASI_OUT_DIR := ".build-artifacts/wasi-components" 
+# Build output
+SOLIDITY_OUT_DIR := ".build-artifacts/contracts"
+WASI_OUT_DIR := ".build-artifacts/wasi-components"
 
 # Deploy output
 CONTRACT_ADDRESS_FILEPATH := ".build-artifacts/contract.address"
