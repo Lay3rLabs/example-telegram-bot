@@ -4,13 +4,13 @@
 
 ## One-time setup
 
-1. Join the [LayerBotTesting](https://t.me/LayerBotTesting) Telegram Group to get bot notifications
+1. Copy `.env.example` to `.env` and set the right vars
 
-2. Copy `.env.example` to `.env` and set the right vars
+2. Join the your Telegram Group associated with the chat ID in `.env` to get notifications
 
-3. **Follow the [Native Install](https://github.com/Lay3rLabs/WAVS/blob/main/docs/QUICKSTART.md#running-natively) instructions on WAVS if you haven't done so already.**
+3. Install WAVS _natively_
 
-Short version:
+_TODO: use the docker images and adjust the commands here accordingly_
 
 ```bash
 git clone https://github.com/Lay3rLabs/WAVS.git ~/WAVS
