@@ -1,4 +1,4 @@
-data = "./.wavs-data/cli"
+data = "/data/.wavs-data/cli"
 
 # Anvil defaults
 [chains.eth.anvil]

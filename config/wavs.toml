@@ -1,4 +1,4 @@
-data = "./.wavs-data/wavs"
+data = "/data/.wavs-data/wavs"
 active_trigger_chains = ["anvil"]
 max_wasm_fuel = 1_000_000
 
